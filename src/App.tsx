@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from "react";
+import GlobalStyle from "./styles/global";
+import styled from "styled-components";
 
-function App() {
+import Board from "./components/Board";
+import PickMode from "./components/PickMode";
+import HoverSquares from "./components/HoverSquares";
+
+const App: FC = () => {
+  const [field, setField] = useState();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      <GlobalStyle />
+      <div>
+        <PickMode setField={setField} />
+        {field && <Board field={field} />}
+      </div>
+      <HoverSquares />
+    </AppWrapper>
   );
-}
+};
+
+const AppWrapper = styled.div`
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  margin: 100px auto;
+`;
 
 export default App;
